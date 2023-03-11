@@ -1,0 +1,18 @@
+{
+    "indicators": ["real", "nominal", "mass"],
+    "start_period": "2010",
+    "end_period": "2030",
+    "transformations": ["L", "PY"],
+    "filters": 
+    [
+        { "facet": "hs4", "values": ["0101", "0102"], "summarize": false },
+        { "facet": "origins", "values": ["GBR", "FRA"], "summarize": false },
+        { "facet": "destinations", "values": ["GBR", "FRA"], "summarize": false },
+
+        { "facet": "hs2", "values": ["01", "02"], "summarize": false },
+        { "facet": "cargo_type", "values": ["bulk", "container"], "summarize": false },
+        { "facet": "mode_of_transport", "values": ["land", "sea", "air"], "summarize": false },
+        { "facet": "commodity_subgroup", "values": [], "summarize": false}
+    ],
+    "limit": 0
+}
