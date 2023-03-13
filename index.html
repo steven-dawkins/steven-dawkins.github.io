@@ -8,6 +8,15 @@
 
     <link rel="stylesheet" href="dist/css/bootstrap-multiselect.css" type="text/css">
 	<script type="text/javascript" src="dist/js/bootstrap-multiselect.js"></script>
+
+    
+
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
+     
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+
 </head>
 
 <body>   
@@ -149,6 +158,11 @@
                     <div class="form-group">
                         <label for="limit">Limit</label>
                         <input type="number" name="limit" value="100" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apiKey">ApiKey</label>
+                        <input type="text" name="apiKey" />
                     </div>
                   </div>
                   <div class="col-sm">
@@ -4343,11 +4357,26 @@
                   <div class="row">
                     <div class="col-sm">
                         <input type="submit" value="Download" class="btn">
-                    </div>  
+                    </div>                      
+                </div>
+
+                <div class="row">
+                    <div class="col-sm">
+                        
+
+                        <div id="jsGrid"></div>
+
+
+                    </div>
                 </div>
             
               </div>
             
+              
+
+  
+
+
             
                
 
@@ -5644,9 +5673,11 @@
                                   
         </form>
 
+       
     </div>
 
     <script src="base64.js"></script>
+    <script src="csv.min.js"></script>
     <script src="query.js"></script>
 
     <script>
