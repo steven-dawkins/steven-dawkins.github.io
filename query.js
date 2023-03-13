@@ -42,14 +42,6 @@ function GetQuery() {
             readFormFilter("origin", "origins"),
             readFormFilter("destination", "destinations"),
         ].filter(f => f !== null),
-        // totals: [ "hs2", "hs4", "cargo_type", "mode_of_transport", "commodity_subgroup", "origin", "destination"],
-        // filters: {
-        //     [{ facet: "hs4", values: ["0101", "0102"]}],
-        //     hs4: form.querySelector('input[name="hs4"]').value.split(","),
-        //     origins: form.querySelector('input[name="origins"]').value.split(","),
-        //     destinations: form.querySelector('input[name="destinations"]').value.split(","),
-        //     years: form.querySelector('input[name="years"]').value.split(",")
-        // },
         limit: parseInt(form.querySelector('input[name="limit"]').value)
     }
 
@@ -134,7 +126,6 @@ $(document).ready(function () {
     formElem.on('submit', async (e) => {
         console.log("submit");
         e.preventDefault();
-        // var form = document.forms[0];
 
         const query = GetQuery();
         const downloadUrl = GetDownloadUrl(query);
