@@ -120,6 +120,11 @@ function loadGrid() {
         query.limit = 1000;
         const downloadUrl = GetDownloadUrl(query);
 
+        if (!downloadUrl) {
+            console.log("No api key");
+            return;
+        }
+
         console.log("starting fetch");
 
         $("#jsGrid").hide();
@@ -157,9 +162,12 @@ $(document).ready(function () {
         const query = GetQuery();
         const downloadUrl = GetDownloadUrl(query);
 
-        console.log("starting fetch");        
+        if (downloadUrl)
+        {
+            console.log("starting fetch");        
 
          window.location = downloadUrl;
+        }
     });
 });
 
