@@ -20,6 +20,11 @@
 </head>
 
 <body>   
+    <style>
+        .not_yet {
+            border: dotted 2px red;
+        }
+    </style>
 
     <div class="container-fluid">
 
@@ -30,7 +35,7 @@
 
                 <div class="row">
                   <div class="col-sm">
-                    <div class="form-group">                
+                    <div class="form-group not_yet">                
                         <h2>Indicators</h2>            
         
                         <select id="indicators" name="indicators" multiple="multiple">
@@ -166,7 +171,7 @@
                     </div>
                   </div>
                   <div class="col-sm">
-                    <div class="form-group">                
+                    <div class="form-group  not_yet">                
                         <h2>Transformations</h2>            
         
                         <select name="transformations" multiple="multiple">
@@ -179,13 +184,13 @@
 
                 <div class="row">
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group  not_yet">
                             <h2>Chapter (HS2)</h2>
             
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="hs2_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                                 </div>              
                             
@@ -299,7 +304,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="hs4_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                  Display total only | Aggregate | Summarize
+                                  Display total only
                                 </label>
                               </div>              
             
@@ -4122,15 +4127,15 @@
                     </div>
                   </div>
 
-                  <div class="row">
+                  <div class="row" style="display: none;">
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group  not_yet">
                             <h2>Cargo type</h2>
             
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="cargo_type_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                             </div>
             
@@ -4146,13 +4151,13 @@
                     </div>
 
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group  not_yet">
                             <h2>Mode of transport</h2>
                             
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="mode_of_transport_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                             </div>
             
@@ -4165,13 +4170,13 @@
                         </div>
                     </div>
                     <div class="col-sm">
-                        <div class="form-group">
+                        <div class="form-group  not_yet">
                             <h2>Commodity Subgroup</h2>
             
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="commodity_subgroup_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                             </div>
             
@@ -4223,7 +4228,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="origins_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                             </div>
             
@@ -4290,7 +4295,7 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="destinations_total">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Display total only | Aggregate | Summarize
+                                    Display total only
                                 </label>
                             </div>
             
@@ -4386,7 +4391,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="hs4_total">
                     <label class="form-check-label" for="flexCheckDefault">
-                      Display total only | Aggregate | Summarize
+                      Display total only
                     </label>
                   </div>              
 

@@ -18,9 +18,16 @@ function readForm(name) {
 
 function toObject(arr, fields) {
     const result= {};
-    for(let i = 0; i < arr.length; i++) {
-        result[fields[i]] = arr[i];
-    }
+    for(let i = 0; i < fields.length; i++) {
+        result[fields[i]] = arr[i] ? arr[i] : "";
+
+        if (Number.isInteger(fields[i])) {
+            const v = result[fields[i]];
+
+            result[fields[i]] = typeof(v) === "string" ? "" : v.toFixed(1)
+        }
+    }    
+
     return result;
 }
 
@@ -28,8 +35,8 @@ function GetQuery() {
     const form = document.querySelector("#filters_form");
 
     const data = {
-        start_year: parseInt(form.querySelector('select[name="start_year"]').value),
-        end_year: parseInt(form.querySelector('select[name="end_year"]').value),
+        startyear: parseInt(form.querySelector('select[name="start_year"]').value),
+        endyear: parseInt(form.querySelector('select[name="end_year"]').value),
         indicators: readMeasureFormField("indicators", "indicators"),
         transformations: readMeasureFormField("transformations", "indicators"),
         filters: [
@@ -45,7 +52,7 @@ function GetQuery() {
         limit: parseInt(form.querySelector('input[name="limit"]').value)
     }
 
-    console.log(JSON.stringify(data, null, 4));
+    // console.log(JSON.stringify(data, null, 4));
 
     return data;
 }
@@ -54,26 +61,63 @@ function GetDownloadUrl(query) {
 
     //return;
     const getUrl = new URL("https://localhost:7136/trade-prism-csv");;
-    getUrl.searchParams.append("query", Base64.encode(JSON.stringify(query)));
-    console.log(getUrl);
+    getUrl.searchParams.append("query", Base64.encode(JSON.stringify(query)));    
 
     const queryBase64 = Base64.encode(JSON.stringify(query));
 
 
     const form = document.querySelector("#filters_form");
-    const apiKey = form.querySelector('input[name="apiKey"]').value;
+    let apiKey = form.querySelector('input[name="apiKey"]').value;
 
+    if (apiKey.length <= 0) {
+        return;
+    }
     
     let url = "https://localhost:7136/trade-prism-csv/";
+    
+    url = "https://func-trade-prism-13346.azurewebsites.net/api/download/";
     url = "http://localhost:7179/api/Download/";
+    url = "https://func-trade-prism-13384.azurewebsites.net/api/download/"
+    
     const downloadUrl = url + queryBase64 + "?apiKey=" + apiKey;
 
     return downloadUrl;
 }
 
+function populateGrid(dataset) {
+    // dataset object doc'd below
+            
+    const data = dataset.records.map(k => toObject(k, dataset.fields));
+    
+
+    const fields = dataset.fields.map(name => (
+    {   
+        name: name.toString(),
+        type: Number.isInteger(name) ? "number": "text",
+        width: Number.isInteger(name) ? 120 : 100,
+        formatter: Number.isInteger(name) ? "number" : "text",
+        validate: "required" 
+    }));
+
+    
+    $("#jsGrid").jsGrid({
+    width: "100%",
+    height: "400px",
+
+    inserting: false,
+    editing: false,
+    sorting: false,
+    paging: false,
+
+    data: data,
+
+    fields: fields
+    });
+}
+
 function loadGrid() {
     const query = GetQuery();
-        query.limit = 100;
+        query.limit = 1000;
         const downloadUrl = GetDownloadUrl(query);
 
         console.log("starting fetch");
@@ -84,28 +128,12 @@ function loadGrid() {
             url: downloadUrl
           }
         ).done(function(dataset) {
-          // dataset object doc'd below
-          
-          const data = dataset.records.map(k => toObject(k, dataset.fields));
-          console.log("formatted");
-
-          console.log(data);
-
-          console.log($("#jsGrid"));
-          $("#jsGrid").jsGrid({
-            width: "100%",
-            height: "400px",
-     
-            inserting: false,
-            editing: false,
-            sorting: false,
-            paging: false,
-     
-            data: data,
-     
-            fields: dataset.fields.map(name => ({ name: name, type: "text", width: 100, validate: "required" }))
-            });
-        }).catch(e => {
+           
+            $("#jsGrid").show();
+            
+            populateGrid(dataset);
+        })
+        .catch(function(e) {
             console.log(e);
         });
 }
@@ -121,17 +149,15 @@ $(document).ready(function () {
 
     const formElem = $("#filters_form");
 
-    console.log(formElem);
 
     formElem.on('submit', async (e) => {
-        console.log("submit");
+        
         e.preventDefault();
 
         const query = GetQuery();
         const downloadUrl = GetDownloadUrl(query);
 
-        console.log("starting fetch");
-        
+        console.log("starting fetch");        
 
          window.location = downloadUrl;
     });
