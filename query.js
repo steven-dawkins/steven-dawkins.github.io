@@ -77,7 +77,7 @@ function GetDownloadUrl(query) {
     
     url = "https://func-trade-prism-13346.azurewebsites.net/api/download/";
     url = "http://localhost:7179/api/Download/";
-    url = "https://func-trade-prism-13384.azurewebsites.net/api/download/"
+    //url = "https://func-trade-prism-13384.azurewebsites.net/api/download/"
     
     const downloadUrl = url + queryBase64 + "?apiKey=" + apiKey;
 
